@@ -86,7 +86,7 @@ const levels = [
     title: "Nível I — Memória de Ferro...",
     clue: "Um sábio uma vez colocou em um velho pergaminho o seguinte dizer: 'Nem todo metal reflete. Às vezes o brilho guarda o que o tempo apagou... Muitas vezes as sombras podem ter mais brilho do que parece...' A imagem abaixo esconde uma palavra... Encontre-a e anote no caderninho...",
     type: "image",
-    media: "media/forja.jpg",
+    media: "media/forja.jpeg",
     placeholder: "palavra (minúsculas)",
     answer: answers.level1,
     hint: "Dica: Use suas habilidades de fotografia 📸, as vezes as respostas estão nos detalhes... e certos detalhes precisam de mais contraste..."
@@ -160,7 +160,7 @@ function render(){
 
   let html = `<div class="enigma"><strong>${lvl.title}</strong><br>${lvl.clue}</div>`;
   if(lvl.type === 'image'){
-    html += `<div class="clue-box"><div class="visual-clue"><img id="clueImg" src="${lvl.media}" alt="Imagem do enigma (troque media/forja.jpg)"></div>
+    html += `<div class="clue-box"><div class="visual-clue"><img id="clueImg" src="${lvl.media}" alt="Imagem do enigma"></div>
              <p class="small">Toque para baixar a imagem (ou segura para salvar). Se achar necessário... hehe</p></div>`;
   } else if(lvl.type === 'audio'){
     html += `<div class="clue-box">
