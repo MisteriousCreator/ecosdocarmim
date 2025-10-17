@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Cartas de Outra Vida — Um enigma Carmico</title>
+<title>Ecos do Carmim: Um Enigma Cármico com Tarot</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
@@ -44,8 +44,8 @@
 <body>
   <div class="wrap">
     <div class="card">
-      <h1>Ecos do Carmim</h1>
-      <p class="lead">Um caderninho digital: siga as pistas, anote no papel se necesário, e reconstrua memórias antigas.</p>
+      <h1>Ecos do Carmim: Um Enigma Cármico</h1>
+      <p class="lead">Um caderninho digital místico: siga as pistas das Rauhnächte, anote se necessário, e reconstrua memórias com tarot e amor eterno.</p>
 
       <div class="steps" id="steps">
         <div class="step" data-i="0">I</div>
@@ -64,114 +64,79 @@
   </div>
 
 <script>
-/* === CONFIG: respostas de exemplo (troca aqui) ===
-   Substitua as respostas abaixo pelas palavras que você quer validar.
-   Respostas devem estar em lowercase, sem acentos (ou normalize no código).
-*/
+/* === CONFIG: respostas (em minúsculas, sem acentos) === */
 const answers = {
-  level1: "memoria",     // palavra escondida na imagem
-  level2: "desejo",   // frase do poema (sem espaços)
-  level3: "vermelho",    // acróstico no pdf/diário
-  level4: "prometidos",   // frase decifrada pelo ROT7
-  level5: "selado"       // palavra final (após sequência)
+  level1: "olhares",        // símbolo escondido na imagem (Roda da Fortuna)
+  level2: "outravida",    // vertical nas itálicas (tema Diabo)
+  level3: "carmim",
+  level4: "prometidos",    // decifrado por ROT2 (número da Roda)
+  level5: "renascimento" // anagrama/síntese final
 };
 
-/* === Lista modular de níveis (você pode adicionar/editar) ===
-   Cada nível tem: title, clue, placeholder, type (image|audio|pdf|inpage|sequence),
-   media (link relativo em /media/...), and optional handler.
-*/
+/* === Níveis modulares com tarot e misticismo === */
 const levels = [
   {
     id: 1,
-    title: "Nível I — O Primeiro Olhar...",
-    clue: `
-    <p>Na festa da cidade, em meio à multidão, meus olhos encontraram os teus.</p>
-    <p>Seus cabelos ruivos brilhavam a cada reflexo das tochas, lamparinas e fogueiras daquela noite, mas ainda assim não ofuscavam o brilho do seu olhar castanho, que penetrava minha alma como um livro aberto,</p>
-    <p>lendo cada pensamento, cada segredo que eu guardava, cada suspiro que não ousava soltar.</p>
-    <p>Mesmo sem uma palavra trocada, senti que nos conhecíamos de outra vida,</p>
-    <p>como se já tivéssemos compartilhado memórias que o tempo jamais poderia apagar.</p>
-    <p>Esta imagem que te apresento guarda algo antigo, um eco do passado que atravessa o tempo e nos conecta.</p>
-    <p>Olhe com atenção e anote no caderninho a palavra que ela sussurra silenciosa, escondida nas sombras e nos detalhes.</p>
-    `,
+    title: "Nível I — Memória de Ferro",
+    clue: "No calor da forja, onde o metal ganha forma, um olhar trocado na festa selou nosso destino. Mas o tempo infectou as memórias... ajuste o brilho do fogo (contraste e inversão) pra revelar a palavra que nos uniu primeiro. Anote no caderninho.",
     type: "image",
-    media: "media/forja.jpeg",
+    media: "media/forja.jpeg", // atualize a imagem pra esconder "olhares" melhor
     placeholder: "palavra (minúsculas)",
     answer: answers.level1,
-    hint: "Cada detalhe desta <em>memória<em> tem significado. Observe bem: é algo que atravessa o tempo e guarda o que já vivemos…"
+    hint: "O fogo da forja revela segredos quando invertido... como um olhar que transcende vidas."
   },
-{
+  {
     id: 2,
-    title: "Nível II — A Carta Queimada",
-    clue: `Certa manhã a donzela que pertencia às casas nobres daquele reino recebe uma correspondencia já esperada... dentro do Envelope levemente chamuscado, havia um bilhete do ferreiro, ainda com cheiro de cinza:<br><br>
-    <i>Minha querida,<br><br>
-    Enquanto moldo o metal, penso em você. Cada faísca que salta da forja me lembra o brilho do seu olhar, que me atravessa mais do que qualquer lâmina que já toquei ou forjei.<br><br>
-    Em cada carta que lhe envio, <em>D<em>eposito um pouco da minha alma... <em>e<em>ssa alma curiosa, inquieta, ansiando por conhecer cada <em>s<em>egredo que suas palavras escondem. Em cada <em>e<em>spaço entre as linhas há um <em>j<em>uramento: o que sinto não <em>o<em>usará se apagar.<br><br>
-    Seus cabelos ruivos dançam na minha mente como chamas que não consomem, e seus olhos castanhos guardam mistérios que anseio desvendar.<br><br>
-    Será que, em outra vida, já nos reconhecemos? Será que essas linhas que escrevo são apenas ecos de algo que sempre existiu?<br><br>
-    Leia entre as palavras e encontre o que meu coração tenta dizer, mesmo quando o mundo parece nos manter afastados.<br><br>
-    Com desejo e cuidado,<br>
-    — O Ferreiro</i><br><br>
-    As palavras escondem um sentimento que o Ferreiro sente pela Nobre...
-    Qual é esse sentimento?`, 
+    title: "Nível II — O Conto da Fênix",
+    clue: "As cartas que trocamos por 2 anos eram como chamas que não se apagam. No bilhete chamuscado do ferreiro, as primeiras centelhas de cada verso revelam o que nos espera além desta vida. Alinhe as iniciais e descubra a frase (sem espaços).<br><br><i>[insira o poema atualizado aqui]</i>",
     type: "inpage",
-    placeholder: "sentimento (6 letras)",
+    placeholder: "frase (sem espaços, minúsculas)",
     answer: answers.level2,
-    hint: "Busque a palavra onde o coração do Ferreiro fez um juramento... ela está escrita nas iniciais destacadas." 
+    hint: "Comece pelo início de cada linha... como as cartas que começaram tudo."
   },
   {
     id: 3,
     title: "Nível III — O Diário da Nobre",
-    clue: "O diário contém o lamento da Nobre sobre o Ferreiro. Ela registrou o tempo e o amor que não pode viver. Com o passar dos anos ela percebeu que muitas das vezes 'O que buscamos está no início de cada parágrafo de nossas vidas... as coisas mais preciosas sempre se revelam primeiro.'",
+    clue: "Aos 25 anos, a nobre escreveu seu lamento nas páginas, culpando-se pela infecção que levou o ferreiro. O que buscamos está no início e no fim de cada entrada... o carmim que tinge nossa história se revela ali.",
     type: "pdf",
     media: "media/diario.pdf",
     placeholder: "palavra (minúsculas)",
     answer: answers.level3,
-    hint: "Algumas vezes, o que procuramos está no começo... leia as primeiras letras de cada linha."
+    hint: "Início e fim de cada linha... como o ciclo de vidas que nos une."
   },
   {
     id: 4,
-    title: "Nível IV — Os Nove Selos",
-    clue: "Entre os sete selos do diário repousam palavras esquecidas. Apenas quem compreende o ritmo da vida e do ferro conseguirá decifrá-las. Cada letra é uma centelha... cada centelha, um passo no caminho da memória.<br><br>Gire o código antigo (ROT13) e descubra o que permanece, mesmo quando o tempo tenta apagar. A promessa não está perdida, apenas oculta... busque o padrão, alinhe as letras, e a verdade surgirá.<br><br><strong>Texto cifrado:</strong> CEBZRAGVQF<br><br><strong>Dica:</strong> ROT13 é uma cifra de substituição onde cada letra do alfabeto é deslocada 13 posições. Por exemplo, A → N, B → O, C → P, e assim por diante. Para decifrar, aplique o mesmo deslocamento no texto cifrado (13 posições), obtendo a mensagem original.",
+    title: "Nível IV — O Julgamento dos Sete",
+    clue: "Nos sete selos do diário, palavras ocultas esperam. Desloque cada centelha pelo número de anos que nossas cartas duraram (como o acidente deslocou meu destino). O código: NPMKCRGBMQ. Revele a promessa.<br><br><strong>Dica:</strong> É uma cifra de substituição onde letras se movem no alfabeto. Encontre o deslocamento na nossa história.",
     type: "inpage",
-    media: null,
     placeholder: "frase (sem espaços, minúsculas)",
     answer: answers.level4,
-    hint: "ROT13 revela o segredo: cada letra move-se 13 posições no alfabeto. Alinhe destino e memória, e a verdade surgirá."
+    hint: "As letras se movem pelo mesmo numero de anos da nossa história da vida passada... ROT2."
   },
   {
     id: 5,
     title: "Nível V — O Elo do Destino",
-    clue: "Clique os símbolos na ordem certa (forja → música → diário → destino). Depois digita a palavra final para selar a promessa.",
+    clue: "Reconstrua nossa linha do tempo: o encontro na festa, as cartas secretas, o acidente na forja, a culpa que a consumiu. Clique na ordem dos eventos pra selar o elo.",
     type: "sequence",
-    media: null,
     placeholder: "palavra final (minúsculas)",
-    answer: answers.level5,
-    hint: "A ordem é a história: o que forjou → o que ecoou → o que escreveu → o que o universo marcou (7)."
+    answer: "eterno",
+    hint: "Ordem da nossa tragédia: onde começou, como continuou, onde quebrou, como terminou."
   }
+// No HTML: mude os seq-btn pra data-arc="festa">🎉 Festa</button> etc.
 ];
 
 /* === Estado === */
 let cur = 0, attempts = 0, hints = 0, elapsed = 0, timerInt = null, seqOrder = [];
 
-/* UTIL: normaliza strings (remove acentos básicos) */
+/* UTIL: normaliza strings */
 function norm(s){
   if(!s) return "";
   return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').toLowerCase();
 }
 
-/* RENDER */
-const stageArea = document.getElementById('stageArea');
-const steps = document.getElementById('steps');
-const timerEl = document.getElementById('timer');
-const statusEl = document.getElementById('status');
-
-function updateSteps(){
-  document.querySelectorAll('.step').forEach((el, i) => el.classList.toggle('done', i < cur));
-}
-function updateLog(){ statusEl.textContent = `Tentativas: ${attempts} • Pistas: ${hints}`; }
-function updateTimer(){ timerEl.textContent = `Tempo: ${elapsed}s`; }
-
+/* RENDER com mensagens pessoais e debug */
 function render(){
+  console.log('Rendering level ' + cur); // Debug: Verifique no console se executa
   const lvl = levels[cur];
   if(!lvl) return onComplete();
   updateSteps();
@@ -179,115 +144,61 @@ function render(){
   let html = `<div class="enigma"><strong>${lvl.title}</strong><br>${lvl.clue}</div>`;
   if(lvl.type === 'image'){
     html += `<div class="clue-box"><div class="visual-clue"><img id="clueImg" src="${lvl.media}" alt="Imagem do enigma"></div>
-             <p class="small">Toque para baixar a imagem (ou segura para salvar). Se achar necessário... hehe</p></div>`;
-  } else if(lvl.type === 'audio'){
-    html += `<div class="clue-box">
-              <p class="small">Use o player abaixo. Se o botão 'Inverter' falhar no seu celular, baixe o arquivo e abra no editor (Audacity ou app simples) para inverter.</p>
-              <div style="text-align:center;margin-top:8px">
-                <audio id="audioPlayer" controls preload="auto" style="width:100%"><source src="${lvl.media}"></audio>
-                <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
-                  <button class="btn ghost" id="revBtn">Tocar Invertido</button>
-                  <a class="btn ghost" href="${lvl.media}" download>Baixar Áudio</a>
-                </div>
-              </div>
-            </div>`;
+             <p class="small">Ajuste brilho para revelar (ou baixe).</p></div>`;
   } else if(lvl.type === 'pdf'){
-    html += `<div class="clue-box"><p class="small">Abra o PDF (link abaixo) no seu celular e leia com calma — o acróstico está nas primeiras letras de cada linha.</p>
-             <p style="text-align:center;margin-top:8px"><a class="btn ghost" href="${lvl.media}" target="_blank">Abrir Documento</a></p></div>`;
+    html += `<div class="clue-box"><p class="small">Abra o PDF e explore a grade.</p>
+             <p style="text-align:center"><a class="btn ghost" href="${lvl.media}" target="_blank">Abrir Diário</a></p></div>`;
   } else if(lvl.type === 'sequence'){
-    html += `<div class="clue-box"><p class="small">Toque os símbolos na ordem certa.</p>
-             <div style="display:flex;flex-wrap:wrap;justify-content:center;margin-top:10px">
-               <button class="seq-btn" data-arc="forja">🔥 Forja</button>
-               <button class="seq-btn" data-arc="musica">🎵 Canto</button>
-               <button class="seq-btn" data-arc="diario">📜 Diário</button>
-               <button class="seq-btn" data-arc="destino">7️⃣ Destino</button>
+    html += `<div class="clue-box"><p class="small">Toque na ordem certa.</p>
+             <div style="display:flex;flex-wrap:wrap;justify-content:center">
+               <button class="seq-btn" data-arc="roda">🛞 Roda</button>
+               <button class="seq-btn" data-arc="diabo">😈 Diabo</button>
+               <button class="seq-btn" data-arc="carruagem">🚀 Carruagem</button>
              </div>
-             <p id="seqMsg" class="hint" style="text-align:center;margin-top:10px"></p>
-             </div>`;
+             <p id="seqMsg" class="hint"></p></div>`;
   }
 
-  html += `<label style="display:block;margin-top:12px" class="small">Resposta</label>
+  html += `<label class="small">Resposta</label>
            <input id="answerInput" placeholder="${lvl.placeholder}" autocomplete="off" autocapitalize="none" spellcheck="false" />
            <div class="controls"><button class="btn" id="submitBtn">Conferir</button><button class="btn ghost" id="hintBtn">Pista (+30s)</button></div>
            <p id="result" class="hint"></p>`;
 
-  stageArea.innerHTML = html;
+  document.getElementById('stageArea').innerHTML = html;
 
-  // event bindings
   document.getElementById('submitBtn').addEventListener('click', onSubmit);
   document.getElementById('hintBtn').addEventListener('click', onHint);
   const inp = document.getElementById('answerInput');
-  inp && inp.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') onSubmit(); });
-  inp && inp.focus();
+  if (inp) {
+    inp.addEventListener('keyup', (e) => { if(e.key === 'Enter') onSubmit(); });
+    inp.focus();
+  }
 
-  // special handlers
-  if(lvl.type === 'image'){
-    const img = document.getElementById('clueImg');
-    img.addEventListener('click', ()=>{ window.open(lvl.media, '_blank'); });
-  } else if(lvl.type === 'audio'){
-    setupReverseButton(lvl.media);
-  } else if(lvl.type === 'sequence'){
+  if(lvl.type === 'image' && document.getElementById('clueImg')) {
+    document.getElementById('clueImg').addEventListener('click', () => window.open(lvl.media, '_blank'));
+  } else if(lvl.type === 'sequence') {
     document.querySelectorAll('.seq-btn').forEach(btn => btn.addEventListener('click', handleSeq));
   }
 }
 
-/* AUDIO: tocar invertido via WebAudio (tentativa). Se falhar, dá instruções pra baixar. */
-async function setupReverseButton(url){
-  const revBtn = document.getElementById('revBtn');
-  const audioEl = document.getElementById('audioPlayer');
-  if(!revBtn) return;
-  revBtn.addEventListener('click', async ()=>{
-    revBtn.disabled = true;
-    revBtn.textContent = 'processando...';
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const resp = await fetch(url);
-      const arrBuf = await resp.arrayBuffer();
-      const buf = await ctx.decodeAudioData(arrBuf);
-      // cria buffer invertido
-      const nch = buf.numberOfChannels;
-      const reversed = ctx.createBuffer(nch, buf.length, buf.sampleRate);
-      for(let c=0;c<nch;c++){
-        const chd = buf.getChannelData(c);
-        const rev = reversed.getChannelData(c);
-        for(let i=0;i<chd.length;i++) rev[i] = chd[chd.length - 1 - i];
-      }
-      const src = ctx.createBufferSource();
-      src.buffer = reversed;
-      src.connect(ctx.destination);
-      src.start();
-      src.onended = ()=>{ revBtn.disabled = false; revBtn.textContent = 'Tocar Invertido'; };
-    } catch(e){
-      console.error(e);
-      alert('Seu navegador não permitiu reprodução invertida. Baixe o arquivo e inverta no app (ex Audacity).');
-      revBtn.disabled = false;
-      revBtn.textContent = 'Tocar Invertido';
-    }
-  });
-}
-
-/* SEQUENCE handler */
+/* SEQUENCE handler atualizado */
 function handleSeq(e){
   const arc = e.currentTarget.dataset.arc;
   seqOrder.push(arc);
   e.currentTarget.classList.add('correct');
   const seqMsg = document.getElementById('seqMsg');
-  const correct = ['forja','musica','diario','destino'];
+  const correct = ['roda','diabo','carruagem'];
   const idx = seqOrder.length - 1;
   if(seqOrder[idx] !== correct[idx]){
-    seqMsg.textContent = '❌ Sequência errada. Recomece.';
+    seqMsg.textContent = '❌ Errado. Recomece.';
     document.querySelectorAll('.seq-btn').forEach(b=>b.classList.remove('correct'));
     seqOrder = [];
     setTimeout(()=>{ seqMsg.textContent = ''; },1500);
     return;
   }
   if(seqOrder.length === correct.length){
-    seqMsg.textContent = '✅ Sequência correta. A palavra final foi desbloqueada (digite para confirmar).';
-    // auto-fill final suggestion (não obriga)
-    const inp = document.getElementById('answerInput');
-    if(inp) inp.value = 'selado';
+    seqMsg.textContent = '✅ Correto. Sintetize para confirmar.';
   } else {
-    seqMsg.textContent = `(${seqOrder.length}/${correct.length}) Acertou essa etapa.`;
+    seqMsg.textContent = `(${seqOrder.length}/${correct.length}) Acertou.`;
   }
 }
 
@@ -303,16 +214,16 @@ function onSubmit(){
   const val = norm(inp ? inp.value : '');
   const correct = norm(levels[cur].answer);
   const res = document.getElementById('result');
-  if(!val){ res.textContent = 'O enigma pede uma resposta.'; return; }
+  if(!val){ res.textContent = 'Resposta necessária.'; return; }
   attempts++;
   if(val === correct){
-    res.textContent = '✓ Pista aceita. Avançando...';
+    res.textContent = '✓ Aceita. Avançando...';
     cur++;
     updateLog();
     updateSteps();
     setTimeout(()=>{ if(cur < levels.length) render(); else onComplete(); },900);
   } else {
-    res.textContent = '✗ Não é isso. Releia suas anotações e tente de novo.';
+    res.textContent = '✗ Tente novamente.';
     updateLog();
   }
 }
@@ -326,33 +237,44 @@ function stopTimer(){ clearInterval(timerInt); timerInt=null; }
 
 function onComplete(){
   stopTimer();
-  // mensagem final estilosa
-  stageArea.innerHTML = `<div class="enigma" style="border-left-color:var(--border-color)">
+  document.getElementById('stageArea').innerHTML = `<div class="enigma" style="border-left-color:var(--border-color)">
     <strong>A PROMESSA SELADA</strong><br>
-    Você reconstruiu ecos de outra vida.<br><br>
+    Você reconstruiu ecos kármicos.<br><br>
     <p style="font-family:'Playfair Display',serif;color:var(--accent);font-size:1.05rem">
-      "Ferreiro e Nobre. O carmesim e o fogo. O 7 gira e nos reencontra.<br>
-       Obrigado por seguir até aqui. Esta é a memória que eu guardo. — Rod"
+      "Ferreiro e Nobre. Carmesim e fogo. A Roda gira, o Diabo tenta, o Carruagem triunfa.<br>
+       Obrigado, Bia. Esta memória é nossa. — Rod"
     </p>
-    <div style="margin-top:12px;text-align:center">
-      <button class="btn" id="restart">Jogar de Novo</button>
+    <div style="text-align:center">
+      <button class="btn" id="restart">Jogar Novamente</button>
       <button class="btn ghost" id="share">Compartilhar</button>
     </div>
   </div>`;
   document.getElementById('restart').addEventListener('click', ()=>{ resetAll(); });
   document.getElementById('share').addEventListener('click', ()=> {
-    const txt = `Terminei o Caderninho: Ecos do Carmim — a promessa foi selada. ❤️`;
+    const txt = `Completei Ecos do Carmim — promessa selada! ❤️`;
     if(navigator.share) navigator.share({title:'Ecos do Carmim', text:txt});
     else alert(txt);
   });
   updateSteps();
 }
 
-/* RESET e boot */
-function updateLog(){ document.getElementById('status').textContent = `Tentativas: ${attempts} • Pistas: ${hints}`; }
-function resetAll(){ cur=0; attempts=0; hints=0; elapsed=0; seqOrder=[]; clearInterval(timerInt); timerInt=null; render(); updateLog(); updateSteps(); updateTimer(); }
-resetAll(); startTimer();
+const steps = document.getElementById('steps');
+const timerEl = document.getElementById('timer');
+const statusEl = document.getElementById('status');
 
+function updateSteps(){
+  document.querySelectorAll('.step').forEach((el, i) => el.classList.toggle('done', i < cur));
+}
+function updateLog(){ statusEl.textContent = `Tentativas: ${attempts} • Pistas: ${hints}`; }
+function updateTimer(){ timerEl.textContent = `Tempo: ${elapsed}s`; }
+
+function resetAll(){ cur=0; attempts=0; hints=0; elapsed=0; seqOrder=[]; stopTimer(); render(); updateLog(); updateSteps(); updateTimer(); }
+
+try {
+  resetAll(); startTimer();
+} catch (error) {
+  console.error('Erro ao inicializar: ', error);
+}
 </script>
 </body>
 </html>
