@@ -45,7 +45,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Ecos do Carmim: Um Enigma Cármico</h1>
-      <p class="lead">Um caderninho digital místico: siga as pistas das Rauhnächte, anote se necessário, e reconstrua memórias com tarot e amor eterno.</p>
+      <p class="lead">Um caderninho digital místico: siga as pistas, anote se necessário, e reconstrua memórias com tarot e amor carmico.</p>
 
       <div class="steps" id="steps">
         <div class="step" data-i="0">I</div>
@@ -66,11 +66,11 @@
 <script>
 /* === CONFIG: respostas (em minúsculas, sem acentos) === */
 const answers = {
-  level1: "olhares",        // símbolo escondido na imagem (Roda da Fortuna)
-  level2: "outravida",    // vertical nas itálicas (tema Diabo)
+  level1: "olhares",
+  level2: "outravida",
   level3: "carmim",
-  level4: "prometidos",    // decifrado por ROT2 (número da Roda)
-  level5: "renascimento" // anagrama/síntese final
+  level4: "prometidos",
+  level5: "eterno"
 };
 
 /* === Níveis modulares com tarot e misticismo === */
@@ -88,21 +88,21 @@ const levels = [
   {
     id: 2,
     title: "Nível II — O Conto da Fênix",
-    clue: "As cartas que trocamos por 2 anos eram como chamas que não se apagam. No bilhete chamuscado do ferreiro, as primeiras centelhas de cada verso revelam o que nos espera além desta vida. Alinhe as iniciais e descubra a frase (sem espaços).<br><br><i>[insira o poema atualizado aqui]</i>",
+    clue: "As cartas que trocamos por 2 anos eram como chamas que não se apagam. No bilhete chamuscado do ferreiro, as primeiras centelhas de cada verso revelam o que nos espera além desta vida. Alinhe as iniciais e descubra a frase (sem espaços).<br><br><i>O último suspiro guardei neste papiro.<br>Um fogo que não consome, mas transforma.<br>Todo fim é renascimento, minha amada.<br>Renasça das cinzas, como a fênix carmesim.<br>Aperda forja asas pra voar novamente.<br>Vida que arde não morre, apenas evolui.<br>Infectado pelo destino, eu parti cedo.<br>Deixe o carmim ecoar e nos reencontrar.<br>Apromesa selada no vermelho do amor.</i>",
     type: "inpage",
     placeholder: "frase (sem espaços, minúsculas)",
     answer: answers.level2,
-    hint: "Comece pelo início de cada linha... como as cartas que começaram tudo."
+    hint: "Comece pelo início de cada linha... assim como as cartas que começaram tudo."
   },
   {
     id: 3,
     title: "Nível III — O Diário da Nobre",
-    clue: "Aos 25 anos, a nobre escreveu seu lamento nas páginas, culpando-se pela infecção que levou o ferreiro. O que buscamos está no início e no fim de cada entrada... o carmim que tinge nossa história se revela ali.",
+    clue: "Aos 25 anos, a nobre escreveu seu lamento nas páginas, culpando-se pela infecção que levou o ferreiro. O que buscamos está no início e no fim de cada parágrafo principal... o carmim que tinge nossa história se revela ali. (concatene as iniciais com os finais para formar a palavra)",
     type: "pdf",
-    media: "media/diario.pdf",
+    media: "media/diario.pdf", // atualize com o novo PDF gerado
     placeholder: "palavra (minúsculas)",
     answer: answers.level3,
-    hint: "Início e fim de cada linha... como o ciclo de vidas que nos une."
+    hint: "Início de cada parágrafo para a primeira metade, fim (última letra da última palavra) para a segunda... como o ciclo de vidas que nos une."
   },
   {
     id: 4,
@@ -115,12 +115,12 @@ const levels = [
   },
   {
     id: 5,
-    title: "Nível V — O Elo do Destino",
-    clue: "Reconstrua nossa linha do tempo: o encontro na festa, as cartas secretas, o acidente na forja, a culpa que a consumiu. Clique na ordem dos eventos pra selar o elo.",
-    type: "sequence",
+    title: "Nível V — A Carta do Último Sussurro",
+    clue: "Esta carta, escrita nas sombras do diário, carrega meu último sussurro. As memórias que guardaste – 'olhares', 'outravida', 'carmim', 'prometidos' – são as chaves pra revelar minha promessa final. Olha as linhas com cuidado! Junte os ecos da nossa história pra encontrar a palavra que nos une além da vida.<br><br><p>Meu amado, o *olhares* que trocamos na festa ainda brilha em mim. Foi o início de tudo, um momento que o destino guardou. As *outravida* que sonhei contigo me sustentaram na solidão. O **carmim** do fogo da forja e do sangue que te levou me marcou pra sempre. Fui *prometidos* a outro, mas meu coração te escolheu.</p><p>Escrevi-te cartas que o vento levou, cada uma um *olhares* preso no papel. A *outravida* nos chama, um ciclo além da morte. O **carmim** arde em minhas veias, lembrança viva de ti. Fui *prometidos* ao silêncio, mas te prometo eternidade.</p><p>Se a forja me roubou de ti, que o amor nos traga de volta. Teu *olhares* foi minha luz, a *outravida* minha esperança. O **carmim** que carrego é teu eco. Fui *prometidos* ao passado, mas a palavra final vive nas linhas – descobre-a com teu coração.</p>",
+    type: "inpage",
     placeholder: "palavra final (minúsculas)",
-    answer: "eterno",
-    hint: "Ordem da nossa tragédia: onde começou, como continuou, onde quebrou, como terminou."
+    answer: answers.level5,
+    hint: "Segue a ordem da nossa história: festa, cartas, forja, culpa. Pega a primeira letra palavra destacada (italico ou negrito) que encontrarás as chaves meu amor :3."
   }
 // No HTML: mude os seq-btn pra data-arc="festa">🎉 Festa</button> etc.
 ];
@@ -153,6 +153,7 @@ function render(){
              <div style="display:flex;flex-wrap:wrap;justify-content:center">
                <button class="seq-btn" data-arc="roda">🛞 Roda</button>
                <button class="seq-btn" data-arc="diabo">😈 Diabo</button>
+               <button class="seq-btn" data-arc="carruagem">🚀 Carruagem</button>
                <button class="seq-btn" data-arc="carruagem">🚀 Carruagem</button>
              </div>
              <p id="seqMsg" class="hint"></p></div>`;
