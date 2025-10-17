@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Ecos do Carmim — O Caderninho</title>
+<title>Cartas de Outra Vida — Um enigma Carmico</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
@@ -70,7 +70,7 @@
 */
 const answers = {
   level1: "memoria",     // palavra escondida na imagem
-  level2: "outravida",   // frase do poema (sem espaços)
+  level2: "desejo",   // frase do poema (sem espaços)
   level3: "vermelho",    // acróstico no pdf/diário
   level4: "prometidos",   // frase decifrada pelo ROT7
   level5: "selado"       // palavra final (após sequência)
@@ -83,21 +83,40 @@ const answers = {
 const levels = [
   {
     id: 1,
-    title: "Nível I — Memória de Ferro...",
-    clue: "Um sábio uma vez colocou em um velho pergaminho o seguinte dizer: 'Nem todo metal reflete. Às vezes o brilho guarda o que o tempo apagou... e muitas das vezes as sombras podem ter mais brilho do que parece...' A imagem abaixo esconde uma palavra... Encontre-a e anote no caderninho...",
+    title: "Nível I — O Primeiro Olhar...",
+    clue: `
+    <p>Na festa da cidade, em meio à multidão, meus olhos encontraram os teus.</p>
+    <p>Seus cabelos ruivos brilhavam a cada reflexo das tochas, lamparinas e fogueiras daquela noite, mas ainda assim não ofuscavam o brilho do seu olhar castanho, que penetrava minha alma como um livro aberto,</p>
+    <p>lendo cada pensamento, cada segredo que eu guardava, cada suspiro que não ousava soltar.</p>
+    <p>Mesmo sem uma palavra trocada, senti que nos conhecíamos de outra vida,</p>
+    <p>como se já tivéssemos compartilhado memórias que o tempo jamais poderia apagar.</p>
+    <p>Esta imagem que te apresento guarda algo antigo, um eco do passado que atravessa o tempo e nos conecta.</p>
+    <p>Olhe com atenção e anote no caderninho a palavra que ela sussurra silenciosa, escondida nas sombras e nos detalhes.</p>
+    `,
     type: "image",
     media: "media/forja.jpeg",
     placeholder: "palavra (minúsculas)",
     answer: answers.level1,
-    hint: "Use suas habilidades de fotografia 📸, as vezes as respostas estão nos detalhes... e certos detalhes precisam de mais contraste..."
+    hint: "Cada detalhe desta <em>memória<em> tem significado. Observe bem: é algo que atravessa o tempo e guarda o que já vivemos…"
   },
-  {
+{
     id: 2,
-    title: "Nível II — O Conto da Fênix",
-    clue: "Entre as páginas chamuscadas, havia um bilhete do ferreiro, ainda com cheiro de cinza:<br><br><i>Guardei meu último suspiro neste papiro queimado.<br><br>Nem todo fim é cinza, minha amada. Às vezes, o que arde não morre... apenas se transforma pela força do que é real.<br><br>O amor é o único fogo que não consome... ele forja asas. É o que permite, outra vez, a dor queimar e o coração resistir.<br><br>Quando se aceita a perda e se entrega à chama, o que era ferro vira luz.<br><br>A Fênix não teme o fogo... ela o chama pelo nome e renasce.<br><br>Se as palavras certas forem alinhadas, talvez a vida... ou outra vida... nos reúna.</i><br><br>As palavras escondem uma frase. Descubra o que o ferreiro quis dizer antes de desaparecer. (responda sem o uso de espaços)",    type: "inpage",
-    placeholder: "frase (sem espaços, minúsculas)",
-    answer: "outravida",
-    hint: "A fênix carmesim não teme o fim... ela o transforma. Há algo nela que reflete o que vivemos, e o que volta... em outra vida."
+    title: "Nível II — A Carta Queimada",
+    clue: `Certa manhã a donzela que pertencia às casas nobres daquele reino recebe uma correspondencia já esperada... dentro do Envelope levemente chamuscado, havia um bilhete do ferreiro, ainda com cheiro de cinza:<br><br>
+    <i>Minha querida,<br><br>
+    Enquanto moldo o metal, penso em você. Cada faísca que salta da forja me lembra o brilho do seu olhar, que me atravessa mais do que qualquer lâmina que já toquei ou forjei.<br><br>
+    Em cada carta que lhe envio, <em>D<em>eposito um pouco da minha alma... <em>e<em>ssa alma curiosa, inquieta, ansiando por conhecer cada <em>s<em>egredo que suas palavras escondem. Em cada <em>e<em>spaço entre as linhas há um <em>j<em>uramento: o que sinto não <em>o<em>usará se apagar.<br><br>
+    Seus cabelos ruivos dançam na minha mente como chamas que não consomem, e seus olhos castanhos guardam mistérios que anseio desvendar.<br><br>
+    Será que, em outra vida, já nos reconhecemos? Será que essas linhas que escrevo são apenas ecos de algo que sempre existiu?<br><br>
+    Leia entre as palavras e encontre o que meu coração tenta dizer, mesmo quando o mundo parece nos manter afastados.<br><br>
+    Com desejo e cuidado,<br>
+    — O Ferreiro</i><br><br>
+    As palavras escondem um sentimento que o Ferreiro sente pela Nobre...
+    Qual é esse sentimento?`, 
+    type: "inpage",
+    placeholder: "sentimento (6 letras)",
+    answer: answers.level2,
+    hint: "Busque a palavra onde o coração do Ferreiro fez um juramento... ela está escrita nas iniciais destacadas." 
   },
   {
     id: 3,
@@ -111,7 +130,7 @@ const levels = [
   },
   {
     id: 4,
-    title: "Nível IV — O Julgamento dos Sete",
+    title: "Nível IV — Os Nove Selos",
     clue: "Entre os sete selos do diário repousam palavras esquecidas. Apenas quem compreende o ritmo da vida e do ferro conseguirá decifrá-las. Cada letra é uma centelha... cada centelha, um passo no caminho da memória.<br><br>Gire o código antigo (ROT13) e descubra o que permanece, mesmo quando o tempo tenta apagar. A promessa não está perdida, apenas oculta... busque o padrão, alinhe as letras, e a verdade surgirá.<br><br><strong>Texto cifrado:</strong> CEBZRAGVQF<br><br><strong>Dica:</strong> ROT13 é uma cifra de substituição onde cada letra do alfabeto é deslocada 13 posições. Por exemplo, A → N, B → O, C → P, e assim por diante. Para decifrar, aplique o mesmo deslocamento no texto cifrado (13 posições), obtendo a mensagem original.",
     type: "inpage",
     media: null,
