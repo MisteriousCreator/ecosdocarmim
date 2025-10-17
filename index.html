@@ -70,9 +70,9 @@
 */
 const answers = {
   level1: "memoria",     // palavra escondida na imagem
-  level2: "outravida",   // frase do áudio invertido (sem espaços)
+  level2: "outravida",   // frase do poema (sem espaços)
   level3: "vermelho",    // acróstico no pdf/diário
-  level4: "sigotepor",   // frase decifrada pelo ROT7 (exemplo)
+  level4: "prometidos",   // frase decifrada pelo ROT7
   level5: "selado"       // palavra final (após sequência)
 };
 
@@ -112,12 +112,12 @@ const levels = [
   {
     id: 4,
     title: "Nível IV — O Julgamento dos Sete",
-    clue: "O destino é 7. Aplicando ROT7 no texto cifrado aparece a promessa. Decifra e anota sem espaços.",
+    clue: "Entre os sete selos do diário repousam palavras esquecidas. Apenas quem compreende o ritmo da vida e do ferro conseguirá decifrá-las. Cada letra é uma centelha... cada centelha, um passo no caminho da memória.<br><br>Gire o código antigo (ROT13) e descubra o que permanece, mesmo quando o tempo tenta apagar. A promessa não está perdida, apenas oculta... busque o padrão, alinhe as letras, e a verdade surgirá.<br><br><strong>Texto cifrado:</strong> CEBZRAGVQF<br><br><strong>Dica:</strong> ROT13 é uma cifra de substituição onde cada letra do alfabeto é deslocada 13 posições. Por exemplo, A → N, B → O, C → P, e assim por diante. Para decifrar, aplique o mesmo deslocamento no texto cifrado (13 posições), obtendo a mensagem original.",
     type: "inpage",
     media: null,
-    placeholder: "frase (sem espaços)",
+    placeholder: "frase (sem espaços, minúsculas)",
     answer: answers.level4,
-    hint: "Usa um decifrador ROT-7 online e cola o texto do enigma."
+    hint: "ROT13 revela o segredo: cada letra move-se 13 posições no alfabeto. Alinhe destino e memória, e a verdade surgirá."
   },
   {
     id: 5,
