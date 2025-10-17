@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Ecos do Carmim — O Caderninho</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-color:#f7f3e8;
+    --text-color:#3f2f22;
+    --border-color:#b2996e;
+    --accent:#8b0000;
+    --card:#fffcf0;
+    --muted:#796d5f;
+    font-size:15px;
+  }
+  html,body{height:100%;margin:0;background:var(--bg-color);color:var(--text-color);font-family:'Cormorant Garamond',serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:480px;margin:14px auto;padding:12px;box-sizing:border-box}
+  .card{background:var(--card);border:3px solid var(--border-color);border-radius:12px;padding:14px;box-shadow:0 8px 20px rgba(0,0,0,.12);margin-bottom:14px}
+  h1{font-family:'Playfair Display',serif;font-size:1.4rem;margin:0 0 6px;text-align:center;color:var(--accent);border-bottom:2px dashed var(--border-color);padding-bottom:8px}
+  .lead{margin:0 0 12px;font-size:.95rem;text-align:center;font-style:italic;color:var(--muted)}
+  .steps{display:flex;gap:8px;justify-content:center;margin:10px 0}
+  .step{width:28px;height:44px;border:2px solid var(--border-color);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--border-color);background:var(--card)}
+  .step.done{background:var(--accent);color:#fff;border-color:transparent;transform:translateY(-3px)}
+  .enigma{font-size:1rem;line-height:1.4;padding:10px;border-left:4px solid var(--accent);background:rgba(255,255,255,0.5);border-radius:6px}
+  .clue-box{background:#f0eae1;padding:10px;border-radius:8px;margin-top:10px;border:1px dashed var(--border-color)}
+  .visual-clue {text-align:center;margin-top:10px}
+  .visual-clue img{max-width:100%;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+  .controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  input[type="text"]{width:100%;padding:12px;border-radius:8px;border:1px solid var(--border-color);background:var(--card);font-size:1rem;color:var(--text-color);box-sizing:border-box}
+  .btn{flex:1;min-width:120px;padding:12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+  .btn.ghost{background:transparent;border:1px solid var(--border-color);color:var(--text-color);box-shadow:none}
+  .hint{margin-top:10px;color:var(--accent);font-style:italic}
+  .log{margin-top:12px;padding:8px;border-radius:8px;background:var(--card);border:1px solid var(--border-color);text-align:center;color:var(--muted)}
+  .small{font-size:.88rem;color:var(--muted)}
+  .seq-btn{padding:10px;border-radius:6px;border:1px solid var(--border-color);background:var(--card);margin:6px;min-width:90px}
+  .seq-btn.correct{background:var(--accent);color:white;border-color:transparent}
+  @media(min-width:700px){.wrap{max-width:720px;padding:20px}h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Ecos do Carmim</h1>
+      <p class="lead">Um caderninho digital: siga as pistas, anote no papel se necesário, e reconstrua memórias antigas.</p>
+
+      <div class="steps" id="steps">
+        <div class="step" data-i="0">I</div>
+        <div class="step" data-i="1">II</div>
+        <div class="step" data-i="2">III</div>
+        <div class="step" data-i="3">IV</div>
+        <div class="step" data-i="4">V</div>
+      </div>
+
+      <div id="stageArea"></div>
+
+      <div class="log" id="logArea">
+        <span id="timer">Tempo: 0s</span> — <span id="status">Tentativas: 0 • Pistas: 0</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* === CONFIG: respostas de exemplo (troca aqui) ===
+   Substitua as respostas abaixo pelas palavras que você quer validar.
+   Respostas devem estar em lowercase, sem acentos (ou normalize no código).
+*/
+const answers = {
+  level1: "memoria",     // palavra escondida na imagem
+  level2: "outravida",   // frase do áudio invertido (sem espaços)
+  level3: "vermelho",    // acróstico no pdf/diário
+  level4: "sigotepor",   // frase decifrada pelo ROT7 (exemplo)
+  level5: "selado"       // palavra final (após sequência)
+};
+
+/* === Lista modular de níveis (você pode adicionar/editar) ===
+   Cada nível tem: title, clue, placeholder, type (image|audio|pdf|inpage|sequence),
+   media (link relativo em /media/...), and optional handler.
+*/
+const levels = [
+  {
+    id: 1,
+    title: "Nível I — Memória de Ferro...",
+    clue: "Um sábio uma vez colocou em um velho pergaminho o seguinte dizer: 'Nem todo metal reflete. Às vezes o brilho guarda o que o tempo apagou... Muitas vezes as sombras podem ter mais brilho do que parece...' A imagem abaixo esconde uma palavra... Encontre-a e anote no caderninho...",
+    type: "image",
+    media: "media/forja.jpg",
+    placeholder: "palavra (minúsculas)",
+    answer: answers.level1,
+    hint: "Dica: Use suas habilidades de fotografia 📸, as vezes as respostas estão nos detalhes... e certos detalhes precisam de mais contraste..."
+  },
+  {
+    id: 2,
+    title: "Nível II — O Conto da Fênix",
+    clue: "Entre as páginas chamuscadas, havia um bilhete do ferreiro, ainda com cheiro de cinza:<br><br><i>“Nem todo fim é cinza. Às vezes, o que arde não morre... apenas muda de forma. Quando a dor queima, o amor forja asas, e o que era ferro vira chama. A fênix não teme o fogo... ela o chama pelo nome e renasce. Dizem que, se as palavras certas forem alinhadas, o ciclo se completa.”</i><br><br>As palavras escondem uma frase. Descubra o que o ferreiro quis dizer antes de desaparecer.",
+    type: "inpage",
+    placeholder: "frase (sem espaços, minúsculas)",
+    answer: "outravida",
+    hint: "Dica: A ave carmesim contém uma caracteristica atrelada a nossa conexão... a resposta está nesta leve subjetvidade"
+  },
+  {
+    id: 3,
+    title: "Nível III — O Diário da Nobre",
+    clue: "O diário contém o lamento da Nobre sobre o Ferreiro. Ela registrou o tempo e o amor que não pode viver. Com o passar dos anos ela percebeu que muitas das vezes 'O que buscamos está no início de cada parágrafo de nossas vidas... as coisas mais preciosas sempre se revelam primeiro.'",
+    type: "pdf",
+    media: "media/diario.pdf",
+    placeholder: "palavra (minúsculas)",
+    answer: answers.level3,
+    hint: "Dica: Algumas vezes, o que procuramos está no começo... leia as primeiras letras de cada linha."
+  },
+  {
+    id: 4,
+    title: "Nível IV — O Julgamento dos Sete",
+    clue: "O destino é 7. Aplicando ROT7 no texto cifrado aparece a promessa. Decifra e anota sem espaços.",
+    type: "inpage",
+    media: null,
+    placeholder: "frase (sem espaços)",
+    answer: answers.level4,
+    hint: "Dica: usa um decifrador ROT-7 online e cola o texto do enigma."
+  },
+  {
+    id: 5,
+    title: "Nível V — O Elo do Destino",
+    clue: "Clique os símbolos na ordem certa (forja → música → diário → destino). Depois digita a palavra final para selar a promessa.",
+    type: "sequence",
+    media: null,
+    placeholder: "palavra final (minúsculas)",
+    answer: answers.level5,
+    hint: "Dica: a ordem é a história: o que forjou → o que ecoou → o que escreveu → o que o universo marcou (7)."
+  }
+];
+
+/* === Estado === */
+let cur = 0, attempts = 0, hints = 0, elapsed = 0, timerInt = null, seqOrder = [];
+
+/* UTIL: normaliza strings (remove acentos básicos) */
+function norm(s){
+  if(!s) return "";
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').toLowerCase();
+}
+
+/* RENDER */
+const stageArea = document.getElementById('stageArea');
+const steps = document.getElementById('steps');
+const timerEl = document.getElementById('timer');
+const statusEl = document.getElementById('status');
+
+function updateSteps(){
+  document.querySelectorAll('.step').forEach((el, i) => el.classList.toggle('done', i < cur));
+}
+function updateLog(){ statusEl.textContent = `Tentativas: ${attempts} • Pistas: ${hints}`; }
+function updateTimer(){ timerEl.textContent = `Tempo: ${elapsed}s`; }
+
+function render(){
+  const lvl = levels[cur];
+  if(!lvl) return onComplete();
+  updateSteps();
+
+  let html = `<div class="enigma"><strong>${lvl.title}</strong><br>${lvl.clue}</div>`;
+  if(lvl.type === 'image'){
+    html += `<div class="clue-box"><div class="visual-clue"><img id="clueImg" src="${lvl.media}" alt="Imagem do enigma (troque media/forja.jpg)"></div>
+             <p class="small">Toque para baixar a imagem (ou segura para salvar). Se achar necessário... hehe</p></div>`;
+  } else if(lvl.type === 'audio'){
+    html += `<div class="clue-box">
+              <p class="small">Use o player abaixo. Se o botão 'Inverter' falhar no seu celular, baixe o arquivo e abra no editor (Audacity ou app simples) para inverter.</p>
+              <div style="text-align:center;margin-top:8px">
+                <audio id="audioPlayer" controls preload="auto" style="width:100%"><source src="${lvl.media}"></audio>
+                <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
+                  <button class="btn ghost" id="revBtn">Tocar Invertido</button>
+                  <a class="btn ghost" href="${lvl.media}" download>Baixar Áudio</a>
+                </div>
+              </div>
+            </div>`;
+  } else if(lvl.type === 'pdf'){
+    html += `<div class="clue-box"><p class="small">Abra o PDF (link abaixo) no seu celular e leia com calma — o acróstico está nas primeiras letras de cada linha.</p>
+             <p style="text-align:center;margin-top:8px"><a class="btn ghost" href="${lvl.media}" target="_blank">Abrir Documento</a></p></div>`;
+  } else if(lvl.type === 'sequence'){
+    html += `<div class="clue-box"><p class="small">Toque os símbolos na ordem certa.</p>
+             <div style="display:flex;flex-wrap:wrap;justify-content:center;margin-top:10px">
+               <button class="seq-btn" data-arc="forja">🔥 Forja</button>
+               <button class="seq-btn" data-arc="musica">🎵 Canto</button>
+               <button class="seq-btn" data-arc="diario">📜 Diário</button>
+               <button class="seq-btn" data-arc="destino">7️⃣ Destino</button>
+             </div>
+             <p id="seqMsg" class="hint" style="text-align:center;margin-top:10px"></p>
+             </div>`;
+  }
+
+  html += `<label style="display:block;margin-top:12px" class="small">Resposta</label>
+           <input id="answerInput" placeholder="${lvl.placeholder}" autocomplete="off" autocapitalize="none" spellcheck="false" />
+           <div class="controls"><button class="btn" id="submitBtn">Conferir</button><button class="btn ghost" id="hintBtn">Pista (+30s)</button></div>
+           <p id="result" class="hint"></p>`;
+
+  stageArea.innerHTML = html;
+
+  // event bindings
+  document.getElementById('submitBtn').addEventListener('click', onSubmit);
+  document.getElementById('hintBtn').addEventListener('click', onHint);
+  const inp = document.getElementById('answerInput');
+  inp && inp.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') onSubmit(); });
+  inp && inp.focus();
+
+  // special handlers
+  if(lvl.type === 'image'){
+    const img = document.getElementById('clueImg');
+    img.addEventListener('click', ()=>{ window.open(lvl.media, '_blank'); });
+  } else if(lvl.type === 'audio'){
+    setupReverseButton(lvl.media);
+  } else if(lvl.type === 'sequence'){
+    document.querySelectorAll('.seq-btn').forEach(btn => btn.addEventListener('click', handleSeq));
+  }
+}
+
+/* AUDIO: tocar invertido via WebAudio (tentativa). Se falhar, dá instruções pra baixar. */
+async function setupReverseButton(url){
+  const revBtn = document.getElementById('revBtn');
+  const audioEl = document.getElementById('audioPlayer');
+  if(!revBtn) return;
+  revBtn.addEventListener('click', async ()=>{
+    revBtn.disabled = true;
+    revBtn.textContent = 'processando...';
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const resp = await fetch(url);
+      const arrBuf = await resp.arrayBuffer();
+      const buf = await ctx.decodeAudioData(arrBuf);
+      // cria buffer invertido
+      const nch = buf.numberOfChannels;
+      const reversed = ctx.createBuffer(nch, buf.length, buf.sampleRate);
+      for(let c=0;c<nch;c++){
+        const chd = buf.getChannelData(c);
+        const rev = reversed.getChannelData(c);
+        for(let i=0;i<chd.length;i++) rev[i] = chd[chd.length - 1 - i];
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = reversed;
+      src.connect(ctx.destination);
+      src.start();
+      src.onended = ()=>{ revBtn.disabled = false; revBtn.textContent = 'Tocar Invertido'; };
+    } catch(e){
+      console.error(e);
+      alert('Seu navegador não permitiu reprodução invertida. Baixe o arquivo e inverta no app (ex Audacity).');
+      revBtn.disabled = false;
+      revBtn.textContent = 'Tocar Invertido';
+    }
+  });
+}
+
+/* SEQUENCE handler */
+function handleSeq(e){
+  const arc = e.currentTarget.dataset.arc;
+  seqOrder.push(arc);
+  e.currentTarget.classList.add('correct');
+  const seqMsg = document.getElementById('seqMsg');
+  const correct = ['forja','musica','diario','destino'];
+  const idx = seqOrder.length - 1;
+  if(seqOrder[idx] !== correct[idx]){
+    seqMsg.textContent = '❌ Sequência errada. Recomece.';
+    document.querySelectorAll('.seq-btn').forEach(b=>b.classList.remove('correct'));
+    seqOrder = [];
+    setTimeout(()=>{ seqMsg.textContent = ''; },1500);
+    return;
+  }
+  if(seqOrder.length === correct.length){
+    seqMsg.textContent = '✅ Sequência correta. A palavra final foi desbloqueada (digite para confirmar).';
+    // auto-fill final suggestion (não obriga)
+    const inp = document.getElementById('answerInput');
+    if(inp) inp.value = 'selado';
+  } else {
+    seqMsg.textContent = `(${seqOrder.length}/${correct.length}) Acertou essa etapa.`;
+  }
+}
+
+/* SUBMIT/HINT */
+function onHint(){
+  hints++;
+  elapsed += 30;
+  document.getElementById('result').textContent = 'Sussurro: ' + levels[cur].hint;
+  updateLog();
+}
+function onSubmit(){
+  const inp = document.getElementById('answerInput');
+  const val = norm(inp ? inp.value : '');
+  const correct = norm(levels[cur].answer);
+  const res = document.getElementById('result');
+  if(!val){ res.textContent = 'O enigma pede uma resposta.'; return; }
+  attempts++;
+  if(val === correct){
+    res.textContent = '✓ Pista aceita. Avançando...';
+    cur++;
+    updateLog();
+    updateSteps();
+    setTimeout(()=>{ if(cur < levels.length) render(); else onComplete(); },900);
+  } else {
+    res.textContent = '✗ Não é isso. Releia suas anotações e tente de novo.';
+    updateLog();
+  }
+}
+
+/* TIMER e init */
+function startTimer(){
+  if(timerInt) return;
+  timerInt = setInterval(()=>{ elapsed++; updateTimer(); },1000);
+}
+function stopTimer(){ clearInterval(timerInt); timerInt=null; }
+
+function onComplete(){
+  stopTimer();
+  // mensagem final estilosa
+  stageArea.innerHTML = `<div class="enigma" style="border-left-color:var(--border-color)">
+    <strong>A PROMESSA SELADA</strong><br>
+    Você reconstruiu ecos de outra vida.<br><br>
+    <p style="font-family:'Playfair Display',serif;color:var(--accent);font-size:1.05rem">
+      "Ferreiro e Nobre. O carmesim e o fogo. O 7 gira e nos reencontra.<br>
+       Obrigado por seguir até aqui. Esta é a memória que eu guardo. — Rod"
+    </p>
+    <div style="margin-top:12px;text-align:center">
+      <button class="btn" id="restart">Jogar de Novo</button>
+      <button class="btn ghost" id="share">Compartilhar</button>
+    </div>
+  </div>`;
+  document.getElementById('restart').addEventListener('click', ()=>{ resetAll(); });
+  document.getElementById('share').addEventListener('click', ()=> {
+    const txt = `Terminei o Caderninho: Ecos do Carmim — a promessa foi selada. ❤️`;
+    if(navigator.share) navigator.share({title:'Ecos do Carmim', text:txt});
+    else alert(txt);
+  });
+  updateSteps();
+}
+
+/* RESET e boot */
+function updateLog(){ document.getElementById('status').textContent = `Tentativas: ${attempts} • Pistas: ${hints}`; }
+function resetAll(){ cur=0; attempts=0; hints=0; elapsed=0; seqOrder=[]; clearInterval(timerInt); timerInt=null; render(); updateLog(); updateSteps(); updateTimer(); }
+resetAll(); startTimer();
+
+</script>
+</body>
+</html>
